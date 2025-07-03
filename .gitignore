@@ -1,0 +1,46 @@
+# Composer vendor directory
+/vendor/
+
+# Environment files
+.env
+.env.*
+
+# CodeIgniter specific
+/application/logs/
+application/cache/
+application/config/database.php
+
+# IDE and OS files
+.idea/
+*.sublime-project
+*.sublime-workspace
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Node (if you use npm or yarn)
+node_modules/
+
+# PHPStorm
+*.iml
+/.phpstorm.meta.php
+
+# Backup and temporary files
+*.bak
+*.tmp
+*.log
+*.sql
+*.sqlite
+
+# PHPUnit (if used)
+phpunit.xml
+phpunit.xml.dist
+/.phpunit.result.cache
+
+# Excel/Export generated files
+*.xlsx
+*.xls
+
+# System folders that shouldn’t be tracked
+/system/
