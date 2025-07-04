@@ -55,7 +55,7 @@
 4. Import file database:
 
    - Gunakan PhpMyAdmin
-   - Import file `db_vehicle_monitoring.sql` yang tersedia di folder `/database`
+   - Import file `db_vehicle_monitoring.sql` yang tersedia di folder `/other`
 
 5. Ganti Base URL
 
@@ -63,9 +63,13 @@
    - $config['base_url'] = 'http://localhost/vehicle-monitoring-ci3/';
 
 6. Jalankan aplikasi melalui browser:
+
    ```
    http://localhost/vehicle-monitoring-ci3/index.php/auth/login
    ```
+
+7. NOTE
+   - file activity diagram dan physical data model tersedia di folder `/other`
 
 ---
 
