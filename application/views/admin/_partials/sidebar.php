@@ -23,28 +23,34 @@
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Kendaraan -->
-    <li class="nav-item <?= $this->uri->segment(1) == 'vehicle' ? 'active' : '' ?>">
-        <a class="nav-link" href="<?= site_url('vehicle') ?>">
-            <i class="fas fa-fw fa-truck"></i>
-            <span>Data Kendaraan</span>
-        </a>
-    </li>
+    <?php if ($this->session->userdata('role') === 'admin'): ?>
+        <li class="nav-item <?= $this->uri->segment(1) == 'vehicle' ? 'active' : '' ?>">
+            <a class="nav-link" href="<?= site_url('vehicle') ?>">
+                <i class="fas fa-fw fa-truck"></i>
+                <span>Data Kendaraan</span>
+            </a>
+        </li>
+    <?php endif; ?>
 
     <!-- Nav Item - Driver -->
-    <li class="nav-item <?= $this->uri->segment(1) == 'driver' ? 'active' : '' ?>">
-        <a class="nav-link" href="<?= site_url('driver') ?>">
-            <i class="fas fa-fw fa-id-badge"></i>
-            <span>Data Sopir</span>
-        </a>
-    </li>
+    <?php if ($this->session->userdata('role') === 'admin'): ?>
+        <li class="nav-item <?= $this->uri->segment(1) == 'driver' ? 'active' : '' ?>">
+            <a class="nav-link" href="<?= site_url('driver') ?>">
+                <i class="fas fa-fw fa-id-badge"></i>
+                <span>Data Sopir</span>
+            </a>
+        </li>
+    <?php endif; ?>
 
     <!-- Nav Item - Booking -->
-    <li class="nav-item <?= $this->uri->segment(1) == 'booking' ? 'active' : '' ?>">
-        <a class="nav-link" href="<?= site_url('booking') ?>">
-            <i class="fas fa-fw fa-calendar-check"></i>
-            <span>Pemesanan Kendaraan</span>
-        </a>
-    </li>
+    <?php if ($this->session->userdata('role') === 'admin'): ?>
+        <li class="nav-item <?= $this->uri->segment(1) == 'booking' ? 'active' : '' ?>">
+            <a class="nav-link" href="<?= site_url('booking') ?>">
+                <i class="fas fa-fw fa-calendar-check"></i>
+                <span>Pemesanan Kendaraan</span>
+            </a>
+        </li>
+    <?php endif; ?>
 
     <!-- Nav Item - Approval -->
     <?php if ($this->session->userdata('role') === 'approver'): ?>

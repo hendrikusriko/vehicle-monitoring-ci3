@@ -5,9 +5,11 @@ class Vehicle extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        if (!$this->session->userdata('logged_in')) {
+        $this->load->model('Driver_model');
+        if (!$this->session->userdata('logged_in') || $this->session->userdata('role') !== 'admin') {
             redirect('auth/login');
         }
+
         $this->load->model('Vehicle_model');
         $this->load->model('Booking_model');
     }
@@ -45,7 +47,10 @@ class Vehicle extends MY_Controller
             'name' => $this->input->post('name'),
             'license_plate' => $this->input->post('license_plate'),
             'type' => $this->input->post('type'),
-            'ownership' => $this->input->post('ownership')
+            'ownership' => $this->input->post('ownership'),
+            'fuel_type' => $this->input->post('fuel_type'),
+            'fuel_consumption' => $this->input->post('fuel_consumption'),
+            'last_service_date' => $this->input->post('last_service_date')
         ];
         $this->Vehicle_model->insert($data);
         redirect('vehicle');
@@ -57,7 +62,10 @@ class Vehicle extends MY_Controller
             'name' => $this->input->post('name'),
             'license_plate' => $this->input->post('license_plate'),
             'type' => $this->input->post('type'),
-            'ownership' => $this->input->post('ownership')
+            'ownership' => $this->input->post('ownership'),
+            'fuel_type' => $this->input->post('fuel_type'),
+            'fuel_consumption' => $this->input->post('fuel_consumption'),
+            'last_service_date' => $this->input->post('last_service_date')
         ];
         $this->Vehicle_model->update($id, $data);
         redirect('vehicle');

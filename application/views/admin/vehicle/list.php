@@ -34,6 +34,9 @@
                                             <th>No. Polisi</th>
                                             <th>Tipe</th>
                                             <th>Kepemilikan</th>
+                                            <th>Jenis BBM</th>
+                                            <th>Konsumsi BBM</th>
+                                            <th>Tanggal Service Terakhir</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -44,6 +47,9 @@
                                                 <td><?= $v->license_plate ?></td>
                                                 <td><?= ucfirst($v->type) ?></td>
                                                 <td><?= ucfirst($v->ownership) ?></td>
+                                                <td><?= $v->fuel_type ?></td>
+                                                <td><?= $v->fuel_consumption ?></td>
+                                                <td><?= $v->last_service_date ?></td>
                                                 <td width="180">
                                                     <a href="<?= site_url('vehicle/edit/' . $v->id) ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Edit</a>
                                                     <a onclick="deleteConfirm('<?= site_url('vehicle/delete/' . $v->id) ?>')" href="#!" class="btn btn-sm btn-danger text-white">

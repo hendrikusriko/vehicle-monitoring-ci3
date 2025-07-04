@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-use phpoffice\phpspreadsheet\Spreadsheet;
+use Phpoffice\Phpspreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class Booking extends MY_Controller
@@ -10,7 +10,7 @@ class Booking extends MY_Controller
     public function __construct()
     {
         parent::__construct();
-        if (!$this->session->userdata('logged_in')) {
+        if (!$this->session->userdata('logged_in') || $this->session->userdata('role') !== 'admin') {
             redirect('auth/login');
         }
         $this->load->model('Booking_model');
@@ -34,8 +34,9 @@ class Booking extends MY_Controller
     {
         $data['vehicles'] = $this->Vehicle_model->get_all();
         $data['drivers'] = $this->Driver_model->get_all();
-        $data['users'] = $this->User_model->get_all(); // untuk pemesan
-        $data['approvers'] = $this->User_model->get_approvers(); // role approver
+        $data['users'] = $this->User_model->get_all();
+        $data['approvers1'] = $this->User_model->get_approvers_1();
+        $data['approvers2'] = $this->User_model->get_approvers_2();
         $this->load->view('admin/booking/form', $data);
     }
 
@@ -43,7 +44,6 @@ class Booking extends MY_Controller
     public function store()
     {
         $data = $this->input->post();
-        $data['user_id'] = $this->session->userdata('user_id');
         $data['approver_1_status'] = 'pending';
         $data['approver_2_status'] = 'pending';
         $data['status'] = 'pending';
@@ -57,8 +57,9 @@ class Booking extends MY_Controller
         $data['booking'] = $this->Booking_model->get($id);
         $data['vehicles'] = $this->Vehicle_model->get_all();
         $data['drivers'] = $this->Driver_model->get_all();
-        $data['users'] = $this->User_model->get_all(); // untuk pemesan
-        $data['approvers'] = $this->User_model->get_approvers(); // role approver
+        $data['users'] = $this->User_model->get_all();
+        $data['approvers1'] = $this->User_model->get_approvers_1();
+        $data['approvers2'] = $this->User_model->get_approvers_2();
         $this->load->view('admin/booking/form', $data);
     }
 
@@ -86,12 +87,10 @@ class Booking extends MY_Controller
 
         $bookings = $this->Booking_model->get_by_date_range($start, $end);
 
-        // Buat file spreadsheet
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
         $sheet->setTitle("Laporan Booking");
 
-        // Header
         $sheet->fromArray([
             'No',
             'Pemesan',
@@ -106,7 +105,6 @@ class Booking extends MY_Controller
             'Status 2'
         ], null, 'A1');
 
-        // Data
         $row = 2;
         $no = 1;
         foreach ($bookings as $b) {
@@ -125,7 +123,7 @@ class Booking extends MY_Controller
             ], null, 'A' . $row++);
         }
 
-        // Download
+
         $filename = 'laporan_booking_' . $start . '_to_' . $end . '.xlsx';
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=\"$filename\"");

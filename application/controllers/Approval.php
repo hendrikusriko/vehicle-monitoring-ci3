@@ -15,10 +15,7 @@ class Approval extends MY_Controller
     public function index()
     {
         $user_id = $this->session->userdata('user_id');
-
         $data['approver_level'] = 0;
-
-        // Get bookings where the user is either approver_1 or approver_2 and the status is pending
         $data['bookings'] = $this->Booking_model->get_pending_approvals($user_id);
         $this->load->view('admin/approval/list', $data);
     }
@@ -33,7 +30,6 @@ class Approval extends MY_Controller
         } elseif ($booking->approver_2 == $user_id && $booking->approver_1_status === 'approved' && $booking->approver_2_status === 'pending') {
             $this->Booking_model->update($id, ['approver_2_status' => 'approved', 'status' => 'approved']);
         }
-
         redirect('approval');
     }
 

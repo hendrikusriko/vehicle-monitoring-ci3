@@ -53,6 +53,26 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="type">Jenis Bahan Bakar</label>
+                            <select name="fuel_type" class="form-control" required>
+                                <option value="">-- Pilih --</option>
+                                <option value="bensin" <?= isset($vehicle) && $vehicle->fuel_type == 'bensin' ? 'selected' : '' ?>>Bensin</option>
+                                <option value="solar" <?= isset($vehicle) && $vehicle->fuel_type == 'solar' ? 'selected' : '' ?>>Solar</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="license_plate">Konsumsi bahan bakar (KM / Liter)</label>
+                            <input type="number" name="fuel_consumption" class="form-control" required
+                                value="<?= isset($vehicle) ? $vehicle->fuel_consumption : '' ?>">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tanggal Service Terakhir</label>
+                            <input type="date" name="last_service_date" class="form-control" value="<?= isset($vehicle) ? $vehicle->last_service_date : '' ?>" required>
+                        </div>
+
+                        <div class="form-group">
                             <label for="ownership">Kepemilikan</label>
                             <select name="ownership" class="form-control" required>
                                 <option value="">-- Pilih --</option>

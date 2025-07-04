@@ -73,7 +73,7 @@
                                     <label>Approver Level 1</label>
                                     <select name="approver_1" class="form-control" required>
                                         <option value="">-- Pilih Approver 1 --</option>
-                                        <?php foreach ($approvers as $a): ?>
+                                        <?php foreach ($approvers1 as $a): ?>
                                             <option value="<?= $a->id ?>" <?= isset($booking) && $booking->approver_1 == $a->id ? 'selected' : '' ?>>
                                                 <?= $a->name ?> (<?= $a->role ?>)
                                             </option>
@@ -85,7 +85,7 @@
                                     <label>Approver Level 2</label>
                                     <select name="approver_2" class="form-control" required>
                                         <option value="">-- Pilih Approver 2 --</option>
-                                        <?php foreach ($approvers as $a): ?>
+                                        <?php foreach ($approvers2 as $a): ?>
                                             <option value="<?= $a->id ?>" <?= isset($booking) && $booking->approver_2 == $a->id ? 'selected' : '' ?>>
                                                 <?= $a->name ?> (<?= $a->role ?>)
                                             </option>

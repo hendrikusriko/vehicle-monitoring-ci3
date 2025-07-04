@@ -7,7 +7,7 @@ class Driver extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Driver_model');
-        if (!$this->session->userdata('logged_in')) {
+        if (!$this->session->userdata('logged_in') || $this->session->userdata('role') !== 'admin') {
             redirect('auth/login');
         }
     }

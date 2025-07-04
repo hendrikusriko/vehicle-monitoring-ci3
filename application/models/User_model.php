@@ -12,8 +12,21 @@ class User_model extends CI_Model
         return $this->db->get_where('users', ['id' => $id])->row();
     }
 
-    public function get_approvers()
+    public function get_approvers_1()
     {
-        return $this->db->where_in('role', ['approver', 'admin'])->get('users')->result();
+        return $this->db
+            ->where('role', 'approver')
+            ->where('level', 1)
+            ->get('users')
+            ->result();
+    }
+
+    public function get_approvers_2()
+    {
+        return $this->db
+            ->where('role', 'approver')
+            ->where('level', 2)
+            ->get('users')
+            ->result();
     }
 }
