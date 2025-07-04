@@ -30,7 +30,6 @@ node_modules/
 *.bak
 *.tmp
 *.log
-*.sql
 *.sqlite
 
 # PHPUnit (if used)
